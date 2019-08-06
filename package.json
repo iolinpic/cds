@@ -1,0 +1,15 @@
+{
+  "name": "crysmo_dialogs",
+  "version": "0.0.1",
+  "description": "Web forms for Json generation, CRUD and storage on MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "crud"
+  ],
+  "author": "iolinpic <iolinpic@gmail.com>",
+  "license": "MIT"
+}
