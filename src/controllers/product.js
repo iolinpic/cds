@@ -1,4 +1,4 @@
-const Product = require('../models/products.model');
+const Product = require('../models/products');
 //Create new Product
 exports.create = (req, res) => {
     // Request validation
