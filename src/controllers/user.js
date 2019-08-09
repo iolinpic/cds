@@ -9,6 +9,22 @@ exports.create = async (req, res) => {
         res.status(400).send(error);
     }
 };
+exports.all = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).send(users);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+};
+exports.delete = async (req, res) => {
+    try{
+        await User.findByIdAndRemove(req.params.uid)
+        res.status(200).send();
+    }catch (e) {
+        res.status(400).send(e);
+    }
+};
 exports.login = async (req, res) => {
     try {
         const {email, password} = req.body;
@@ -23,13 +39,13 @@ exports.login = async (req, res) => {
     }
 };
 exports.me = async (req, res) => {
-    try{
+    try {
         res.send(req.user);
     } catch (error) {
         res.status(400).send(error);
     }
 };
-exports.logout = async  (req, res) => {
+exports.logout = async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -40,7 +56,7 @@ exports.logout = async  (req, res) => {
         res.status(500).send(error)
     }
 };
-exports.logoutAll = async  (req, res) => {
+exports.logoutAll = async (req, res) => {
     try {
         req.user.tokens.splice(0, req.user.tokens.length);
         await req.user.save();
