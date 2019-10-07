@@ -18,7 +18,6 @@ app.listen(process.env.PORT, () => {
 });
 
 // default route
-require('./routes/product.js')(app);
 require('./routes/user')(app);
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to Crysmo-dialogs page"});
