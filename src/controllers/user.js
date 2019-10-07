@@ -9,6 +9,20 @@ exports.create = async (req, res) => {
         res.status(400).send(error);
     }
 };
+exports.update = async (req,res)=>{
+    try{
+        const user = await User.findOne({_id:req.params.uid});
+        user.name = req.body.name;
+        user.email = req.body.email;
+        if(req.body.password){
+            user.password = req.body.password;
+        }
+        await user.save();
+        res.status(200).send(user);
+    }catch (e) {
+        res.status(400).send(e);
+    }
+};
 exports.all = async (req, res) => {
     try {
         const users = await User.find();
@@ -19,7 +33,7 @@ exports.all = async (req, res) => {
 };
 exports.delete = async (req, res) => {
     try{
-        await User.findByIdAndRemove(req.params.uid)
+        await User.findByIdAndRemove(req.params.uid);
         res.status(200).send();
     }catch (e) {
         res.status(400).send(e);
@@ -33,14 +47,22 @@ exports.login = async (req, res) => {
             return res.status(401).send({error: 'Login failed! Check authentication credentials'})
         }
         const token = await user.generateAuthToken();
-        res.send({user, token})
+        res.status(200).send({user, token})
     } catch (error) {
         res.status(400).send(error)
     }
 };
+exports.user = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.uid);
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
 exports.me = async (req, res) => {
     try {
-        res.send(req.user);
+        res.status(200).send(req.user);
     } catch (error) {
         res.status(400).send(error);
     }
@@ -51,7 +73,7 @@ exports.logout = async (req, res) => {
             return token.token !== req.token
         });
         await req.user.save();
-        res.send()
+        res.status(200).send()
     } catch (error) {
         res.status(500).send(error)
     }
@@ -60,7 +82,7 @@ exports.logoutAll = async (req, res) => {
     try {
         req.user.tokens.splice(0, req.user.tokens.length);
         await req.user.save();
-        res.send();
+        res.status(200).send();
     } catch (error) {
         res.status(500).send(error);
     }

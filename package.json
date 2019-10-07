@@ -1,5 +1,5 @@
 {
-  "name": "crysmo_dialogs",
+  "name": "crysmo_backend",
   "version": "0.0.1",
   "description": "Web forms for Json generation, CRUD and storage on MongoDB",
   "main": "src/server.js",
