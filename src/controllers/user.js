@@ -12,6 +12,7 @@ exports.create = async (req, res) => {
 exports.update = async (req,res)=>{
     try{
         const user = await User.findOne({_id:req.params.uid});
+        // const data = JSON.parse(req.body);
         user.name = req.body.name;
         user.email = req.body.email;
         if(req.body.password){
