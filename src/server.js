@@ -1,4 +1,5 @@
 const express = require('express');
+const expresWinston = require('express-winston');
 const mongoose = require('mongoose');
 const logger = require('./config/logger');
 
@@ -16,6 +17,14 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
+// route logger
+app.use(expresWinston.logger(logger));
+// default route
+require('./routes/user')(app);
+// error logger
+app.use(expresWinston.errorLogger(logger));
+
 app.listen(process.env.PORT, async () => {
   logger.info(`Server is listening on port ${process.env.PORT}`);
   try {
@@ -30,6 +39,3 @@ app.listen(process.env.PORT, async () => {
     process.exit();
   }
 });
-
-// default route
-require('./routes/user')(app);

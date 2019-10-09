@@ -1,5 +1,15 @@
 const User = require('../models/user');
 
+exports.createDefaultUser = async (req, res) => {
+  try {
+    const user = new User({ name: 'admin', email: 'admin@neksys.ru', password: '12345678' });
+    await user.save();
+    await user.generateAuthToken();
+    res.status(201);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+};
 exports.create = async (req, res) => {
   try {
     const user = new User(req.body);
