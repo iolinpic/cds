@@ -51,6 +51,16 @@ exports.delete = async (req, res) => {
     res.status(400).send(e);
   }
 };
+
+exports.user = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.uid);
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+// auth
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,14 +70,6 @@ exports.login = async (req, res) => {
     }
     const token = await user.generateAuthToken();
     res.status(200).send({ user, token });
-  } catch (error) {
-    res.status(400).send(error);
-  }
-};
-exports.user = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.uid);
-    res.status(200).send(user);
   } catch (error) {
     res.status(400).send(error);
   }

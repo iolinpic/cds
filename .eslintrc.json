@@ -5,7 +5,8 @@
   },
   "extends": [
     "airbnb-base",
-    "plugin:promise/recommended"
+    "plugin:promise/recommended",
+    "plugin:jest/all"
   ],
   "globals": {
     "Atomics": "readonly",
