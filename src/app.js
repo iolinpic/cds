@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 // route logger
 app.use(expresWinston.logger(logger));
 // default route
-require('./routes/user')(app);
+app.use('/api', require('./routes').router);
 // error logger
 app.use(expresWinston.errorLogger(logger));
 module.exports = app;

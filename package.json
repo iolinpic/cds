@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest",
-    "start": "env-cmd -f ./.env nodemon --experimental-modules src/server.js"
+    "start": "env-cmd -f ./.env nodemon src/server.js"
   },
   "keywords": [
     "web",
