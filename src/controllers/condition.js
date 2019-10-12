@@ -42,7 +42,7 @@ exports.all = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     await Condition.findByIdAndRemove(req.params.id);
-    res.status(200);
+    res.status(200).send();
   } catch (e) {
     res.status(400).send(e);
   }
