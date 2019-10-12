@@ -13,7 +13,7 @@ app.listen(process.env.PORT, async () => {
     if (process.env.DEBUG === 'true') {
       await mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,
-        // useFindAndModify: false,
+        useFindAndModify: false,
         useCreateIndex: true,
       });
     } else {
