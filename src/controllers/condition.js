@@ -1,7 +1,7 @@
 const Condition = require('../models/conditions');
 const saveConfig = require('../services/saveOnDisk').config;
 const saveCsv = require('../services/saveOnDisk').translation;
-const archivate = require('../services/saveOnDisk').archivate;
+const { archivate } = require('../services/saveOnDisk');
 
 exports.store = async (req, res) => {
   try {
@@ -23,12 +23,6 @@ exports.one = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const condition = await Condition.findByIdAndUpdate(req.params.id, req.body, { upsert: true });
-    // user.name = req.body.name;
-    // user.email = req.body.email;
-    // if (req.body.password) {
-    //   user.password = req.body.password;
-    // }
-    // await condition.save();
     res.status(200).send(condition);
   } catch (e) {
     res.status(400).send(e);
