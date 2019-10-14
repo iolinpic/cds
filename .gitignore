@@ -3,4 +3,4 @@
 /logs/*
 /download/*
 /jsons/*
-*.env
+.env
