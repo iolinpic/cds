@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 
 router.get('/', auth, conditions.all);
+router.get('/generate', auth, conditions.generate);
 router.post('/', auth, conditions.store);
 router.get('/:id', auth, conditions.one);
 router.put('/:id', auth, conditions.update);

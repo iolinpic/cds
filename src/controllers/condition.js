@@ -1,4 +1,7 @@
 const Condition = require('../models/conditions');
+const saveConfig = require('../services/saveOnDisk').config;
+const saveCsv = require('../services/saveOnDisk').translation;
+const archivate = require('../services/saveOnDisk').archivate;
 
 exports.store = async (req, res) => {
   try {
@@ -43,6 +46,30 @@ exports.delete = async (req, res) => {
   try {
     await Condition.findByIdAndRemove(req.params.id);
     res.status(200).send();
+  } catch (e) {
+    res.status(400).send(e);
+  }
+};
+exports.generate = async (req, res) => {
+  try {
+    const conditions = await Condition.find();
+    conditions.forEach((el) => {
+      const obj = el.toObject();
+      const { id, DisplayNameText, DescriptionText } = obj;
+      delete obj.id;
+      // eslint-disable-next-line no-underscore-dangle
+      delete obj._id;
+      delete obj.__v;
+      delete obj.DisplayNameText;
+      delete obj.DescriptionText;
+      saveConfig('conditions', id, obj);
+      saveCsv('conditions', [obj.DisplayName, DisplayNameText]);
+      saveCsv('conditions', [obj.Description, DescriptionText]);
+    });
+    archivate('conditions', (path) => {
+      res.download(path);
+      // res.status(200).send({ path });
+    });
   } catch (e) {
     res.status(400).send(e);
   }
