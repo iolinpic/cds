@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 // const validator = require('validator');
 
-const conditionSchema = mongoose.Schema({
+const abilityPackSchema = mongoose.Schema({
   Name: {
     type: String,
     required: true,
@@ -30,5 +30,5 @@ const conditionSchema = mongoose.Schema({
 // conditionSchema.virtual('Description').get(function virtualName() {
 //   return `condition_description_${this.id}`;
 // });
-const Condition = mongoose.model('Condition', conditionSchema);
-module.exports = Condition;
+const APack = mongoose.model('APack', abilityPackSchema);
+module.exports = APack;
