@@ -6,5 +6,6 @@ router.use('/users', require('./user').router);
 router.use('/auth', require('./auth').router);
 router.use('/conditions', require('./conditions').router);
 router.use('/abilities', require('./abilities').router);
+router.use('/pack', require('./abilityPack').router);
 
 module.exports.router = router;
