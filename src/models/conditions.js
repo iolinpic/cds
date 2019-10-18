@@ -17,7 +17,7 @@ const conditionSchema = mongoose.Schema({
     required: true,
     min: 0,
   },
-  SubType: {
+  Subtype: {
     type: Number,
     required: true,
     min: 0,
