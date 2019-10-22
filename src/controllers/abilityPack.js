@@ -54,6 +54,7 @@ exports.generate = async (req, res) => {
       delete obj.id;
       delete obj._id;
       delete obj.__v;
+      delete obj.Name;
       // delete obj.DisplayNameText;
       // delete obj.DescriptionText;
       saveConfig(namespace, id, obj);

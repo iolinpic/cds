@@ -24,6 +24,12 @@ const abilityPackSchema = mongoose.Schema({
     virtuals: true,
   },
 });
+abilityPackSchema.methods.toJSON = function toJSON() {
+  const obj = this.toObject();
+  delete obj._id;
+  delete obj.__v;
+  return obj;
+};
 // conditionSchema.virtual('DisplayName').get(function virtualName() {
 //   return `condition_name_${this.id}`;
 // });
