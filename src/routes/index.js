@@ -8,5 +8,6 @@ router.use('/conditions', require('./conditions').router);
 router.use('/abilities', require('./abilities').router);
 router.use('/pack', require('./abilityPack').router);
 router.use('/crysm', require('./crysms').router);
+router.use('/item', require('./items').router);
 
 module.exports.router = router;
