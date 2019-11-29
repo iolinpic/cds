@@ -12,6 +12,11 @@ const abilitiesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  AnimationType: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   AbilitType: {
     type: String,
     required: true,
