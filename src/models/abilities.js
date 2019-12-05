@@ -47,6 +47,10 @@ const abilitiesSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  ActDelay: {
+    type: Number,
+    required: true,
+  },
   RestTime: {
     type: Number,
     required: true,
