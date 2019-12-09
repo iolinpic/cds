@@ -9,5 +9,6 @@ router.use('/abilities', require('./abilities').router);
 router.use('/pack', require('./abilityPack').router);
 router.use('/crysm', require('./crysms').router);
 router.use('/item', require('./items').router);
+router.use('/actor', require('./actor').router);
 
 module.exports.router = router;
