@@ -16,31 +16,31 @@ const questsSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  FirstStageId: {
-    type: String,
-    required: true,
-  },
+  // FirstStageId: {
+  //   type: String,
+  //   default: '',
+  // },
   Stage: {
     type: [
       {
-        StageId: {
-          type: String,
-          required: true,
-        },
-        NextStageId: {
-          type: String,
-          default: '',
-        },
+        // StageId: {
+        //   type: String,
+        //   required: true,
+        // },
+        // NextStageId: {
+        //   type: String,
+        //   default: '',
+        // },
         StageDescription: {
           type: String,
           default: '',
         },
         Goals: {
           type: [{
-            GoalId: {
-              type: String,
-              required: true,
-            },
+            // GoalId: {
+            //   type: String,
+            //   required: true,
+            // },
             GoalType: {
               type: String,
               required: true,
