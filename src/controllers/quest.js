@@ -57,9 +57,15 @@ exports.generate = async (req, res) => {
       delete obj.__v;
       delete obj.DisplayNameText;
       delete obj.DescriptionText;
-      saveConfig(namespace, id, obj);
       saveCsv(namespace, [obj.DisplayName, DisplayNameText]);
       saveCsv(namespace, [obj.Description, DescriptionText]);
+      obj.Stage.forEach((stage, index) => {
+        const stageDescription = `stage_description_${index}_${id}`;
+        saveCsv(namespace, [stageDescription, stage.StageDescriptionText]);
+        delete obj.Stage[index].StageDescriptionText;
+        delete obj.Stage[index]._id;
+      });
+      saveConfig(namespace, id, obj);
     });
     archivate(namespace, (path) => {
       res.download(path);
