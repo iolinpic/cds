@@ -12,6 +12,10 @@ const crysmSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  Blueprint: {
+    type: String,
+    required: true,
+  },
   PreviousConfig: {
     type: String,
     default: '',
