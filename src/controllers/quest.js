@@ -64,6 +64,14 @@ exports.generate = async (req, res) => {
         saveCsv(namespace, [stageDescription, stage.StageDescriptionText]);
         delete obj.Stage[index].StageDescriptionText;
         delete obj.Stage[index]._id;
+        stage.Goals.forEach((goal, goalIndex) => {
+          if (goal.GoalType === 'CustomGoal') {
+            const goalDescription = `goal_description_${goalIndex}_${index}_${id}`;
+            saveCsv(namespace, [goalDescription, goal.GoalOptions.CustomGoalText]);
+            obj.Stage[index].Goals[goalIndex].GoalOptions.CustomGoalText = goalDescription;
+          }
+          delete obj.Stage[index].Goals[goalIndex]._id;
+        });
       });
       saveConfig(namespace, id, obj);
     });

@@ -50,8 +50,8 @@ const questsSchema = mongoose.Schema({
               required: true,
             },
             GoalOptions: {
-              type: [],
-              default: [],
+              type: Object,
+              default: {},
             },
           }],
           default: [],
