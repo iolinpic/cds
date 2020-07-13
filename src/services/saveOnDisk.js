@@ -31,7 +31,8 @@ module.exports.translation = (namespace, data) => {
   if (!fs.existsSync(path)) {
     fs.writeFileSync(path, 'Key,SourceString\n');
   }
-  fs.appendFileSync(path, `${data.toString()}\n`);
+  // fs.appendFileSync(path, `${data.toString()}\n`);
+  fs.appendFileSync(path, `${data[0].toString()},"${data[1].toString()}"\n`);
 };
 
 function saveToZip(targetDir, outPath, done) {
