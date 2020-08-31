@@ -22,7 +22,15 @@ exports.one = async (req, res) => {
 };
 exports.update = async (req, res) => {
   try {
-    const quest = await Quest.findByIdAndUpdate(req.params.id, req.body, { upsert: true });
+    // const data = { ...res.body };
+    // data.Stage.forEach((el, arr, index) => {
+    //   data.Stage[index].StageDescription = `stage_description_${index}_${req.params.id}`;
+    // });
+    const quest = await Quest.findByIdAndUpdate(req.params.id, res.body, { upsert: true });
+    // quest.Stage.forEach((el, arr, index) => {
+    //   quest.Stage[index].StageDescription = `stage_description_${index}_${req.params.id}`;
+    // });
+    // await quest.save();
     res.status(200).send(quest);
   } catch (e) {
     res.status(400).send(e);
@@ -61,6 +69,7 @@ exports.generate = async (req, res) => {
       saveCsv(namespace, [obj.Description, DescriptionText]);
       obj.Stage.forEach((stage, index) => {
         const stageDescription = `stage_description_${index}_${id}`;
+        obj.Stage[index].StageDescription = stageDescription;
         saveCsv(namespace, [stageDescription, stage.StageDescriptionText]);
         delete obj.Stage[index].StageDescriptionText;
         delete obj.Stage[index]._id;
