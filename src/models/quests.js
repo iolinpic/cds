@@ -39,6 +39,14 @@ const questsSchema = mongoose.Schema({
           type: String,
           default: '',
         },
+        StageName: {
+          type: String,
+          default: '',
+        },
+        StageNameText: {
+          type: String,
+          default: '',
+        },
         Goals: {
           type: [{
             // GoalId: {

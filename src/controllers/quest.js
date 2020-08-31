@@ -26,7 +26,7 @@ exports.update = async (req, res) => {
     // data.Stage.forEach((el, arr, index) => {
     //   data.Stage[index].StageDescription = `stage_description_${index}_${req.params.id}`;
     // });
-    const quest = await Quest.findByIdAndUpdate(req.params.id, res.body, { upsert: true });
+    const quest = await Quest.findByIdAndUpdate(req.params.id, res.params, { upsert: true, new: true });
     // quest.Stage.forEach((el, arr, index) => {
     //   quest.Stage[index].StageDescription = `stage_description_${index}_${req.params.id}`;
     // });
