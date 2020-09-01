@@ -12,5 +12,6 @@ router.use('/item', require('./items').router);
 router.use('/actor', require('./actor').router);
 router.use('/zone', require('./zone').router);
 router.use('/quest', require('./quests').router);
+router.use('/file', require('./files').router);
 
 module.exports.router = router;

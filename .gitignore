@@ -4,3 +4,4 @@
 /download/*
 /jsons/*
 .env
+/public/

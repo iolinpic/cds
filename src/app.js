@@ -1,11 +1,15 @@
 const express = require('express');
 const expresWinston = require('express-winston');
+const busboy = require('connect-busboy');
 const logger = require('./config/logger');
+const path = require('path');
 
 const app = express();
 // parse requests
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(busboy());
+app.use(express.static('public'));
 // Enable CORS for all HTTP methods
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
