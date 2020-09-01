@@ -26,7 +26,13 @@ exports.update = async (req, res) => {
     // data.Stage.forEach((el, arr, index) => {
     //   data.Stage[index].StageDescription = `stage_description_${index}_${req.params.id}`;
     // });
-    const quest = await Quest.findByIdAndUpdate(req.params.id, res.params, { upsert: true, new: true });
+    const quest = await Quest.findById(req.params.id);
+    quest.DisplayNameText = req.body.DisplayNameText;
+    quest.DescriptionText= req.body.DescriptionText;
+    quest.Type= req.body.Type;
+    quest.Stage= req.body.Stage;
+    await quest.save();
+    //const quest = await Quest.findByIdAndUpdate(req.params.id, res.body, { upsert: true, new: true });
     // quest.Stage.forEach((el, arr, index) => {
     //   quest.Stage[index].StageDescription = `stage_description_${index}_${req.params.id}`;
     // });
@@ -34,6 +40,7 @@ exports.update = async (req, res) => {
     res.status(200).send(quest);
   } catch (e) {
     res.status(400).send(e);
+    console.log(e);
   }
 };
 exports.all = async (req, res) => {
@@ -71,7 +78,11 @@ exports.generate = async (req, res) => {
         const stageDescription = `stage_description_${index}_${id}`;
         obj.Stage[index].StageDescription = stageDescription;
         saveCsv(namespace, [stageDescription, stage.StageDescriptionText]);
+        const stageName = `stage_name_${index}_${id}`;
+        obj.Stage[index].StageName = stageName;
+        saveCsv(namespace, [stageName, stage.StageNameText]);
         delete obj.Stage[index].StageDescriptionText;
+        delete obj.Stage[index].StageNameText;
         delete obj.Stage[index]._id;
         stage.Goals.forEach((goal, goalIndex) => {
           if (goal.GoalType === 'CustomGoal') {
