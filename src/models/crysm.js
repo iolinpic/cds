@@ -12,6 +12,12 @@ const crysmSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  IconBig: {
+    type: String,
+  },
+  IconSmall: {
+    type: String,
+  },
   Blueprint: {
     type: String,
     required: true,

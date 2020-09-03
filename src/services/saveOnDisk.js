@@ -17,7 +17,7 @@ const clear = (targetDir) => {
 module.exports.config = (namespace, id, data) => {
   const dir = `${baseDir}/${namespace}`;
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir, { recursive: true });
   }
   const path = `${dir}/${id}.json`;
   fs.writeFileSync(path, JSON.stringify(data));
@@ -25,7 +25,7 @@ module.exports.config = (namespace, id, data) => {
 module.exports.translation = (namespace, data) => {
   const dir = `${baseDir}/${namespace}`;
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir, { recursive: true });
   }
   const path = `${dir}/${namespace}.csv`;
   if (!fs.existsSync(path)) {
@@ -33,6 +33,21 @@ module.exports.translation = (namespace, data) => {
   }
   // fs.appendFileSync(path, `${data.toString()}\n`);
   fs.appendFileSync(path, `${data[0].toString()},"${data[1].toString()}"\n`);
+};
+module.exports.images = (namespace, path) => {
+  const dir = `${baseDir}/${namespace}`;
+  const subdir = `${dir}/static/`;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+  if (!fs.existsSync(subdir)) {
+    fs.mkdirSync(subdir);
+  }
+  const fullPath = `public/${path}`;
+  if (fs.existsSync(fullPath)) {
+    const filename = fullPath.split('/').pop();
+    fs.copyFileSync(fullPath, subdir + filename);
+  }
 };
 
 function saveToZip(targetDir, outPath, done) {

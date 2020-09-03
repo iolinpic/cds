@@ -1,6 +1,7 @@
 const Crysm = require('../models/crysm');
 const saveConfig = require('../services/saveOnDisk').config;
 const saveCsv = require('../services/saveOnDisk').translation;
+const saveImage = require('../services/saveOnDisk').images;
 const { archivate } = require('../services/saveOnDisk');
 
 exports.store = async (req, res) => {
@@ -51,6 +52,8 @@ exports.generate = async (req, res) => {
     crysms.forEach((el) => {
       const obj = el.toObject();
       const { id, DisplayNameText, DescriptionText } = obj;
+      saveImage(namespace, obj.IconBig);
+      saveImage(namespace, obj.IconSmall);
       delete obj.id;
       // eslint-disable-next-line no-underscore-dangle
       delete obj._id;

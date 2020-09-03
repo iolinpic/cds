@@ -12,6 +12,9 @@ const itemSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  Icon: {
+    type: String,
+  },
   Type: {
     type: String,
     required: true,
