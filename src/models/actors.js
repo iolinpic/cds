@@ -15,6 +15,16 @@ const actorSchema = mongoose.Schema({
   Icon: {
     type: String,
   },
+  EquipArtifacts: {
+    type: [],
+    required: true,
+    default: [],
+  },
+  Consumables: {
+    type: [],
+    required: true,
+    default: [],
+  },
 
 }, {
   toObject: {
