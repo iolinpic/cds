@@ -1,6 +1,7 @@
 const Actor = require('../models/actors');
 const saveConfig = require('../services/saveOnDisk').config;
 const saveCsv = require('../services/saveOnDisk').translation;
+const saveImage = require('../services/saveOnDisk').images;
 const { archivate } = require('../services/saveOnDisk');
 
 exports.store = async (req, res) => {
@@ -47,20 +48,22 @@ exports.delete = async (req, res) => {
 exports.generate = async (req, res) => {
   try {
     const actors = await Actor.find();
+    const namespace = 'actors';
     actors.forEach((el) => {
       const obj = el.toObject();
       const { id, DisplayNameText, DescriptionText } = obj;
+      saveImage(namespace, obj.Icon);
       delete obj.id;
       // eslint-disable-next-line no-underscore-dangle
       delete obj._id;
       delete obj.__v;
       delete obj.DisplayNameText;
       delete obj.DescriptionText;
-      saveConfig('actors', id, obj);
-      saveCsv('actors', [obj.DisplayName, DisplayNameText]);
-      saveCsv('actors', [obj.Description, DescriptionText]);
+      saveConfig(namespace, id, obj);
+      saveCsv(namespace, [obj.DisplayName, DisplayNameText]);
+      saveCsv(namespace, [obj.Description, DescriptionText]);
     });
-    archivate('actors', (path) => {
+    archivate(namespace, (path) => {
       res.download(path);
     });
   } catch (e) {

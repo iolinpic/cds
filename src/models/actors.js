@@ -12,6 +12,9 @@ const actorSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  Icon: {
+    type: String,
+  },
 
 }, {
   toObject: {
