@@ -12,6 +12,9 @@ const conditionSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  Icon: {
+    type: String,
+  },
   Type: {
     type: Number,
     required: true,
