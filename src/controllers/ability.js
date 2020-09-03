@@ -1,6 +1,7 @@
 const Ability = require('../models/abilities');
 const saveConfig = require('../services/saveOnDisk').config;
 const saveCsv = require('../services/saveOnDisk').translation;
+const saveImage = require('../services/saveOnDisk').images;
 const { archivate } = require('../services/saveOnDisk');
 
 exports.store = async (req, res) => {
@@ -51,6 +52,7 @@ exports.generate = async (req, res) => {
     abilities.forEach((el) => {
       const obj = el.toObject();
       const { id, DisplayNameText, DescriptionText } = obj;
+      saveImage(namespace, obj.Icon);
       delete obj.id;
       // eslint-disable-next-line no-underscore-dangle
       delete obj._id;

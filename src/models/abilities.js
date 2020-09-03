@@ -11,6 +11,9 @@ const abilitiesSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  Icon: {
+    type: String,
+  },
   AnimationType: {
     type: String,
     required: true,
