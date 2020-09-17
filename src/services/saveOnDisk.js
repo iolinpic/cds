@@ -35,6 +35,9 @@ module.exports.translation = (namespace, data) => {
   fs.appendFileSync(path, `${data[0].toString()},"${data[1].toString()}"\n`);
 };
 module.exports.images = (namespace, path) => {
+  if (path === undefined || path === '') {
+    return;
+  }
   const dir = `${baseDir}/${namespace}`;
   const subdir = `${dir}/static/`;
   if (!fs.existsSync(dir)) {
