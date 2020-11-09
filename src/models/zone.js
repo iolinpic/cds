@@ -12,6 +12,17 @@ const zoneSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  TitleText: {
+    type: String,
+    trim: true,
+    default:'',
+  },
+  AutoText: {
+    type: String,
+    trim: true,
+    default:'',
+  },
+
 
 }, {
   toObject: {
@@ -21,11 +32,11 @@ const zoneSchema = mongoose.Schema({
     virtuals: true,
   },
 });
-// zoneSchema.virtual('DisplayName').get(function virtualName() {
-//   return `zone_name_${this.id}`;
-// });
-// zoneSchema.virtual('Description').get(function virtualName() {
-//   return `zone_description_${this.id}`;
-// });
+zoneSchema.virtual('Title').get(function virtualName() {
+   return `zone_title_${this.DisplayNameText}`;
+ });
+zoneSchema.virtual('Auto').get(function virtualName() {
+   return `zone_auto_${this.DisplayNameText}`;
+});
 const Zone = mongoose.model('Zone', zoneSchema);
 module.exports = Zone;
