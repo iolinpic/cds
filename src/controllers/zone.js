@@ -1,7 +1,7 @@
 const Zone = require('../models/zone');
-// const saveConfig = require('../services/saveOnDisk').config;
-// const saveCsv = require('../services/saveOnDisk').translation;
-// const { archivate } = require('../services/saveOnDisk');
+const saveConfig = require('../services/saveOnDisk').config;
+const saveCsv = require('../services/saveOnDisk').translation;
+const { archivate } = require('../services/saveOnDisk');
 
 exports.store = async (req, res) => {
   try {
@@ -44,26 +44,26 @@ exports.delete = async (req, res) => {
     res.status(400).send(e);
   }
 };
-// exports.generate = async (req, res) => {
-//   try {
-//     const zones = await Zone.find();
-//     zones.forEach((el) => {
-//       const obj = el.toObject();
-//       const { id, DisplayNameText, DescriptionText } = obj;
-//       delete obj.id;
-//       // eslint-disable-next-line no-underscore-dangle
-//       delete obj._id;
-//       delete obj.__v;
-//       delete obj.DisplayNameText;
-//       delete obj.DescriptionText;
-//       saveConfig('zones', id, obj);
-//       saveCsv('zones', [obj.DisplayName, DisplayNameText]);
-//       saveCsv('zones', [obj.Description, DescriptionText]);
-//     });
-//     archivate('zones', (path) => {
-//       res.download(path);
-//     });
-//   } catch (e) {
-//     res.status(400).send(e);
-//   }
-// };
+ exports.generate = async (req, res) => {
+   try {
+     const zones = await Zone.find();
+     zones.forEach((el) => {
+       const obj = el.toObject();
+       const { id, TitleText, AutoText } = obj;
+       delete obj.id;
+       // eslint-disable-next-line no-underscore-dangle
+       delete obj._id;
+       delete obj.__v;
+       delete obj.TitleText;
+       delete obj.AutoText;
+       saveConfig('zones', id, obj);
+       saveCsv('zones', [obj.Title, TitleText]);
+       saveCsv('zones', [obj.Auto, AutoText]);
+     });
+     archivate('zones', (path) => {
+       res.download(path);
+     });
+   } catch (e) {
+     res.status(400).send(e);
+   }
+ };
