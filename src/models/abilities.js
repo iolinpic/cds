@@ -72,6 +72,10 @@ const abilitiesSchema = mongoose.Schema({
     required: true,
     default: [],
   },
+  FX: {
+    type: String,
+    default: "",
+  },
 }, {
   toObject: {
     virtuals: true,
