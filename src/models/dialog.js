@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 // const validator = require('validator');
 
 const dialogSchema = mongoose.Schema({
+    Name: {
+        type:String,
+        default:"",
+    },
     StartStageId: {
         type:String,
         required:true,
