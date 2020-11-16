@@ -31,8 +31,8 @@ exports.update = async (req, res) => {
 };
 exports.all = async (req, res) => {
     try {
-        const abilities = await Dialog.find();
-        res.status(200).send(abilities);
+        const dialogs = await Dialog.find();
+        res.status(200).send(dialogs);
     } catch (e) {
         res.status(400).send(e);
     }
@@ -47,18 +47,29 @@ exports.delete = async (req, res) => {
 };
 exports.generate = async (req, res) => {
     try {
-        const abilities = await Dialog.find();
+        const dialogs = await Dialog.find();
         const namespace = 'dialogs';
-        abilities.forEach((el) => {
+        dialogs.forEach((el) => {
             const obj = el.toObject();
-            const { id, DisplayNameText, DescriptionText } = obj;
+            const { id } = obj;
             saveImage(namespace, obj.Icon);
             delete obj.id;
             // eslint-disable-next-line no-underscore-dangle
             delete obj._id;
             delete obj.__v;
-            delete obj.DisplayNameText;
-            delete obj.DescriptionText;
+            delete obj.Name;
+            obj.Stages.forEach((stage,index)=>{
+                const stageDescription = `stage_textline_${index}_${id}`;
+                obj.Stages[index].TextLineLoc = stageDescription;
+                saveCsv(namespace, [stageDescription, stage.TextLine]);
+                delete obj.Stages[index].TextLine;
+                stage.Answers.forEach((answer,aIndex)=>{
+                    const answerDescription = `stage_answer_${aIndex}_${index}_${id}`;
+                    obj.Stages[index].Answers[aIndex].AnswerLoc = answerDescription;
+                    saveCsv(namespace, [answerDescription, answer.Answer]);
+                    delete obj.Stages[index].Answers[aIndex].Answer;
+                })
+            })
             saveConfig(namespace, id, obj);
          /*   saveCsv(namespace, [obj.DisplayName, DisplayNameText]);
             saveCsv(namespace, [obj.Description, DescriptionText]);*/
