@@ -13,5 +13,6 @@ router.use('/actor', require('./actor').router);
 router.use('/zone', require('./zone').router);
 router.use('/quest', require('./quests').router);
 router.use('/file', require('./files').router);
+router.use('/dialog', require('./dialog').router);
 
 module.exports.router = router;

@@ -25,6 +25,10 @@ const actorSchema = mongoose.Schema({
     required: true,
     default: [],
   },
+  DialogGreetings:{
+    type:[],
+    default:[],
+  }
 
 }, {
   toObject: {
