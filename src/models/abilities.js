@@ -76,6 +76,10 @@ const abilitiesSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  HitFX: {
+    type: String,
+    default: "",
+  },
 }, {
   toObject: {
     virtuals: true,

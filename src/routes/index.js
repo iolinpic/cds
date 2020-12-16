@@ -14,5 +14,6 @@ router.use('/zone', require('./zone').router);
 router.use('/quest', require('./quests').router);
 router.use('/file', require('./files').router);
 router.use('/dialog', require('./dialog').router);
+router.use('/spack', require('./storagePack').router);
 
 module.exports.router = router;
