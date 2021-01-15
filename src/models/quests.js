@@ -6,6 +6,10 @@ const questsSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  QTechName: {
+    type: String,
+    trim: true,
+  },
   DescriptionText: {
     type: String,
     required: true,
