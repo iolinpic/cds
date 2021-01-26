@@ -31,6 +31,7 @@ exports.update = async (req, res) => {
     quest.DescriptionText = req.body.DescriptionText;
     quest.Type = req.body.Type;
     quest.Stage = req.body.Stage;
+    quest.QTechName = req.body.QTechName;
     await quest.save();
     //const quest = await Quest.findByIdAndUpdate(req.params.id, res.body, { upsert: true, new: true });
     // quest.Stage.forEach((el, arr, index) => {
