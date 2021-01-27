@@ -63,12 +63,12 @@ exports.generate = async (req, res) => {
                 obj.Stages[index].TextLineLoc = stageDescription;
                 saveCsv(namespace, [stageDescription, stage.TextLine]);
                 delete obj.Stages[index].TextLine;
-                stage.Answers.forEach((answer,aIndex)=>{
+/*                stage.Answers.forEach((answer,aIndex)=>{
                     const answerDescription = `stage_answer_${aIndex}_${index}_${id}`;
                     obj.Stages[index].Answers[aIndex].AnswerLoc = answerDescription;
                     saveCsv(namespace, [answerDescription, answer.Answer]);
                     delete obj.Stages[index].Answers[aIndex].Answer;
-                })
+                })*/
             })
             saveConfig(namespace, id, obj);
          /*   saveCsv(namespace, [obj.DisplayName, DisplayNameText]);
