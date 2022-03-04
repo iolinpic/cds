@@ -72,6 +72,21 @@ const abilitiesSchema = mongoose.Schema({
     required: true,
     default: [],
   },
+  ConditionEnemyLine: {
+    type: [],
+    required: true,
+    default: [],
+  },
+  ConditionAllyLine: {
+    type: [],
+    required: true,
+    default: [],
+  },
+  ConditionAllLines: {
+    type: [],
+    required: true,
+    default: [],
+  },
   FX: {
     type: String,
     default: "",
