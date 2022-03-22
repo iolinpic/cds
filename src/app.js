@@ -2,7 +2,7 @@ const express = require('express');
 const expresWinston = require('express-winston');
 const busboy = require('connect-busboy');
 const logger = require('./config/logger');
-const path = require('path');
+// const path = require('path');
 
 const app = express();
 // parse requests
